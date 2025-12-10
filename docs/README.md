@@ -99,3 +99,31 @@ run-pipeline = "python pipeline.py"
 #This command runs the generator for the ascii representation of the directory tree excluding directories and files preceded by '.'
 gen-dir-repr = "pwsh -Command './generate_ascii_dir_repr.ps1 ./ -Exclude .*, __pycache__ -Depth 3'"
 ```
+
+| Activity title | Bucket | Status | Assigned to (team) | Suggested members |
+|----------------|--------|------|-------------------|-------------------|
+| Timestamp | Team1 | cleaned, separated into date and time columns | Team1 | Kaloina, Siham |
+| Source IP Address | Team1 | | Team1 | Kaloina, Siham |
+| Source Port | Team1 | | Team1 | Kaloina, Siham |
+| Protocol | Team1 | | Team1 | Kaloina, Siham |
+| Malware Indicators | Team1 | | Team1 | Kaloina, Siham |
+| Action Taken | Team1 | | Team1 | Kaloina, Siham |
+| Firewall Logs | Team1 | | Team1 | Kaloina, Siham |
+| Log Source | Team1 | | Team1 | Kaloina, Siham |
+| Destination IP Address | Team2 | to be done| Team2 | Elly, Eugenio |
+| Destination Port | Team2 | to be done | Team2 | Elly, Eugenio |
+| Packet Type | Team2 | to be done| Team2 | Elly, Eugenio |
+| Payload Data | Team2 | to be done| Team2 | Elly, Eugenio |
+| Alerts/Warnings | Team2 | to be done| Team2 | Elly, Eugenio |
+| Severity Level | Team2 | to be done | Team2 | Elly, Eugenio |
+| Geo-location Data | Team2 | assigned each city to their coordinates successful at 93.5% of rows yet  | Team2 | Elly, Eugenio |
+| IDS/IPS Alerts | Team2 | to be done | Team2 | Elly, Eugenio |
+| Packet Length | Team3 | | Team3 | Sanchana, Otmane, Vasantha |
+| Traffic Type | Team3 | | Team3 | Sanchana, Otmane, Vasantha |
+| Anomaly Scores | Team3 | | Team3 | Sanchana, Otmane, Vasantha |
+| Attack Signature | Team3 | | Team3 | Sanchana, Otmane, Vasantha |
+| User Information | Team3 | | Team3 | Sanchana, Otmane, Vasantha |
+| Device Information | Team3 | | Team3 | Sanchana, Otmane, Vasantha |
+| Network Segment | Team3 | | Team3 | Sanchana, Otmane, Vasantha |
+| Proxy Information | Team3 | | Team3 | Sanchana, Otmane, Vasantha |
+| Attack Type | Non assegnato | | | |
