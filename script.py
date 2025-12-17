@@ -131,12 +131,13 @@ fig.show()
 #%% IP address
 i = 2
 for destsource in [ "Source" , "Destination" ] :
-    df.insert( i , f"{ destsource } IP latitude" , value = pd.NA )
-    df.insert( i + 1 , f"{ destsource } IP longitude" , value = pd.NA )
-    df.insert( i + 2 , f"{ destsource } IP country" , value = pd.NA )
-    df.insert( i + 3 , f"{ destsource } IP city" , value = pd.NA )
+    col = df.columns.get_loc( f"{ destsource } IP Address" ) + 1
+    df.insert( col , f"{ destsource } IP latitude" , value = pd.NA )
+    df.insert( col + 1 , f"{ destsource } IP longitude" , value = pd.NA )
+    df.insert( col + 2 , f"{ destsource } IP country" , value = pd.NA )
+    df.insert( col + 3 , f"{ destsource } IP city" , value = pd.NA )
     df[[ f"{ destsource } IP latitude" , f"{ destsource } IP longitude" , f"{ destsource } IP country" , f"{ destsource } IP city" ]] = df[ f"{ destsource } IP Address" ].apply( lambda x : ip_to_coords( x ))
-    i = i + 5
+
 ## IP address map graph
 fig = subp(
     rows = 1 ,
@@ -196,15 +197,89 @@ fig.update_layout(
 fig.show()
 
 # Proxy Information
-## * NAs = no proxy or what ?????
 col_name = "Proxy Information"
-print( df[ col_name ].value_counts())
+# print( df[ col_name ].value_counts())
 col = df.columns.get_loc( col_name )
 df.insert( col + 1 , "Proxy latitude" , value = pd.NA )
 df.insert( col + 2 , "Proxy longitude" , value = pd.NA )
 df.insert( col + 3 , "Proxy country" , value = pd.NA )
 df.insert( col + 4 , "Proxy city" , value = pd.NA )
-df[[ "Proxy latitude" , "Proxy longitude" , "Proxy country" , "Proxy city" ]] = df[ "Source IP Address" ].apply( lambda x : ip_to_coords( x ))
+df[[ "Proxy latitude" , "Proxy longitude" , "Proxy country" , "Proxy city" ]] = df[ "Proxy Information" ].apply( lambda x : ip_to_coords( x ))
+
+def sankey_diag_IPs( ntop ) :
+    IPs_col = {}
+    labels = pd.Series( dtype = "string" )
+    for IPid , dfcol in zip([ "SIP" , "DIP" , "PIP" ] , [ "Source IP country" , "Destination IP country" , "Proxy country" ]) :
+        IPs_col[ IPid ] = df[ dfcol ].copy( deep = True )
+        IPs_col[ f"{ IPid }labs" ] = pd.Series( IPs_col[ IPid ].value_counts().index[ : ntop ])
+        bully = ( IPs_col[ IPid ].isin( IPs_col[ f"{IPid}labs" ]) | IPs_col[ IPid ].isna())
+        IPs_col[ IPid ].loc[ ~ bully ] = "other"
+        IPs_col[ f"{ IPid }labs" ] = f"{ IPid } " + pd.concat([ IPs_col[ f"{ IPid }labs" ] , pd.Series([ "other" ])])
+        labels = pd.concat([ labels , IPs_col[ f"{ IPid }labs" ]])
+    labels = list( labels.reset_index( drop = True ))
+    
+    aggregIPs = pd.DataFrame({
+        "SIP" : IPs_col[ "SIP" ] ,
+        "PIP" : IPs_col[ "PIP" ] ,
+        "DIP" : IPs_col[ "DIP" ] ,
+        })
+    aggregIPs = aggregIPs.groupby( by = [ 
+        "SIP" , 
+        "PIP" , 
+        "DIP"
+        ]).size().to_frame( "count" )
+
+    # computation of source , target , value
+    source = []
+    target = []
+    value = []
+    nlvl = aggregIPs.index.nlevels
+    for idx , row in aggregIPs.iterrows()  :
+        row_labs = []
+        if ( nlvl == 1 ) :
+            row_labs.append( f"{ aggregIPs.index.name } { idx }" )
+        else :
+            for i , val in enumerate( idx ) :
+                row_labs.append( f"{ aggregIPs.index.names[ i ] } { val }" )
+        for i in range( 0 , nlvl - 1 ) :
+            source.append( labels.index( row_labs[ i ]))
+            target.append( labels.index( row_labs[ i + 1 ]))
+            value.append( row.item() )
+    
+    # plot the sankey diagram
+    n = len( labels )
+    colors = px.colors.sample_colorscale(
+        px.colors.sequential.Inferno ,
+        [ i / ( n - 1 ) for i in range( n )]
+        ) 
+    fig = go.Figure( data = [ go.Sankey(
+        node = dict(
+          pad = 15 ,
+          thickness = 20 ,
+          line = dict( 
+              color = "rgba( 0 , 0 , 0 , 0.1 )" ,
+              width = 0.5 
+              ) ,
+          label = labels ,
+          color = colors ,
+          ) ,
+        link = dict(
+          source = source ,
+          target = target ,
+          value = value 
+          ))])
+    fig.update_layout(
+        title_text = "Sankey Diagram" ,
+        # font_family = "Courier New" ,
+        # font_color = "blue" , 
+        font_size = 20 ,
+        title_font_family = "Avenir" ,
+        title_font_color = "black",
+        )
+    fig.show()
+    
+    return aggregIPs
+aggregIPs = sankey_diag_IPs( 10 )
 
 #%% Source Port
 col_name = "Source Port ephemeral"
