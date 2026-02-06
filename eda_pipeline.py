@@ -63,7 +63,7 @@ load_dotenv(DOTENV_PATH)
 # - "Timestamp" -> "date" for temporal analysis
 # - Port columns renamed to indicate ephemeral port analysis
 # - Alerts/Warnings -> Alert Trigger for binary encoding
-df = pd.read_csv(os.path.join(os.getenv("DATA_PATH"), "cybersecurity_attacks.csv"))
+df = pd.read_csv(os.getenv("DATA_PATH"), sep="|")
 
 df = data_prep.rename_columns(df)
 
@@ -686,7 +686,7 @@ catvars = np.array(
         "Source Port ephemeral",
         "Destination Port ephemeral",
         "Protocol",
-        "Packet Type",
+        "Packet Type Control",
         "Traffic Type",
         "Malware Indicators",
         "Alert Trigger",
@@ -723,7 +723,7 @@ df_catvar = df[
         "Source Port ephemeral",
         "Destination Port ephemeral",
         "Protocol",
-        "Packet Type",
+        "Packet Type Control",
         "Traffic Type",
         "Malware Indicators",
         "Alert Trigger",
@@ -790,7 +790,7 @@ df_catvar = df[
         "Source Port ephemeral",
         "Destination Port ephemeral",
         "Protocol",
-        "Packet Type",
+        "Packet Type Control",
         "Traffic Type",
         "Malware Indicators",
         "Alert Trigger",
@@ -1005,6 +1005,11 @@ fig.show()
 print("\n" + "=" * 60)
 print("SAVING PROCESSED DATASET")
 print("=" * 60)
+
+# Ensure mixed-type columns are converted to string to avoid pyarrow errors
+for col in df.columns:
+    if df[col].dtype == "object":
+        df[col] = df[col].astype(str)
 
 df.to_parquet("data/kaloinas_eda.parquet", index=False)
 print("Dataset saved to data/kaloinas_eda.parquet")
