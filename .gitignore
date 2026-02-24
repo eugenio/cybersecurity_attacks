@@ -22,3 +22,5 @@ script_win.py
 
 # VSCODE settings
 .vscode/*
+# serena
+.serena/*
