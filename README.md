@@ -70,29 +70,67 @@ Deployed on **Streamlit Cloud** (pipeline re-run disabled in cloud; models loade
 ## Project Structure
 
 ```
-cybersecurity_attacks/
-├── app.py                    # Streamlit app
-├── pipeline.py               # ML pipeline orchestrator
-├── data/
-│   ├── cybersecurity_attacks.csv   # Raw dataset
-│   └── pre_model_df.parquet        # Cached EDA output
-├── models/                   # Trained model .pkl files
-├── geolite2_db/              # MaxMind GeoLite2 DBs (ASN + Country)
-├── src/
-│   ├── eda_pipeline.py       # EDA transformations
-│   ├── modelling.py          # Model training + metrics
-│   ├── ports_pipeline.py     # Port-focused Extra Trees pipeline
-│   ├── upload_models.py      # HuggingFace upload
-│   └── utilities/
-│       ├── config.py         # Global config
-│       ├── data_preparation.py    # IP geolocation, UA parsing
-│       ├── feature_engineering.py # Crosstab + port encoding
-│       ├── helpers.py        # Inference-time feature engineering
-│       ├── mem_monitor.py    # Memory profiling
-│       └── ...
-├── cybersecurity_eda.ipynb   # Exploratory analysis notebook
-├── pixi.toml                 # Environment + tasks
-└── requirements.txt
+cybersecurity_attacks                                                                                                                                                                                                                                                                   
+├── app.py                                                                                                                                                                                                                                                                              
+├── data                                                                                                                                                                                                                                                                                
+│   └── cybersecurity_attacks.csv
+├── docs
+│   ├── download.jpg
+│   └── README.md
+├── EDA graphs
+│   ├── Action Taken.png
+│   ├── Alerts_Warnings.png
+│   ├── Anomaly Scores.png
+│   ├── Attack Signature.png
+│   ├── Browser family.png
+│   ├── date H.png
+│   ├── date M.png
+│   ├── date MW.png
+│   ├── date WD.png
+│   ├── date.png
+│   ├── Destination Port.png
+│   ├── Malware Indicators.png
+│   ├── OS family.png
+│   ├── Packet Length.png
+│   ├── Packet Type.png
+│   ├── Protocol.png
+│   ├── Severity Level.png
+│   ├── Source & Dest IPs.png
+│   └── Source Port.png
+├── generate_ascii_dir_repr.ps1
+├── geolite2_db
+│   ├── GeoLite2-ASN.mmdb
+│   ├── GeoLite2-City.mmdb
+│   ├── GeoLite2-Country.mmdb
+│   └── readme.txt
+├── LICENSE
+├── pipeline.py
+├── pixi.lock
+├── pixi.toml
+├── README.md
+├── requirements.txt
+└── src
+    ├── __init__.py
+    ├── eda_pipeline.py
+    ├── EDA.py
+    ├── modelling.py
+    ├── ports_pipeline.py
+    ├── upload_models.py
+    └── utilities
+        ├── __init__.py
+        ├── config.py
+        ├── data_preparation.py
+        ├── diagrams.py
+        ├── download_files.py
+        ├── feature_engineering.py
+        ├── helpers.py
+        ├── mem_monitor.py
+        ├── payload_analyzer.py
+        ├── statistical_analysis.py
+        ├── time_series.py
+        ├── utils.py
+        ├── validation.py
+        └── visualization.py
 ```
 
 ## Key Dependencies

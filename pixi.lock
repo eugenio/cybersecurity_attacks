@@ -395,7 +395,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/29/cd/eadada1cdcf7d7b9b5053e583239e59b9e05902a2983032d790fbfc7bad7/ioc_fanger-4.2.1-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/44/68/9c8bfd59d4fafebf20ffa1e9ee3b0492a1f7d7816de0757c4367a4fecab3/ioc_finder-5.0.3-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/50/07/8f02b5c352e5deaf1461ededd4cb844e96da96f0158fccfa397e85f4a8d0/prince-0.16.5-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/ed/61/01299712d3537e18d4452e8598115390826089e7000faf7cc5b20212aa81/streamlit_date_picker-0.0.5-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/fa/6e/3e955517e22cbdd565f2f8b2e73d52528b14b8bcfdb04f62466b071de847/validators-0.35.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/51/38/347d1fcde4edabd338d5872ca5759ccfb95ff1cf5207dafded981fd08c4f/yara_python-4.5.4.tar.gz
       win-64:
@@ -796,7 +795,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/29/cd/eadada1cdcf7d7b9b5053e583239e59b9e05902a2983032d790fbfc7bad7/ioc_fanger-4.2.1-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/44/68/9c8bfd59d4fafebf20ffa1e9ee3b0492a1f7d7816de0757c4367a4fecab3/ioc_finder-5.0.3-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/50/07/8f02b5c352e5deaf1461ededd4cb844e96da96f0158fccfa397e85f4a8d0/prince-0.16.5-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/ed/61/01299712d3537e18d4452e8598115390826089e7000faf7cc5b20212aa81/streamlit_date_picker-0.0.5-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/fa/6e/3e955517e22cbdd565f2f8b2e73d52528b14b8bcfdb04f62466b071de847/validators-0.35.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ad/e1/f6a72c155f3241360da890c218911d09bf63329eca9cfa1af64b1498339b/yara_python-4.5.4-cp312-cp312-win_amd64.whl
 packages:
@@ -8541,13 +8539,6 @@ packages:
   - pkg:pypi/streamlit?source=hash-mapping
   size: 7575911
   timestamp: 1770235703121
-- pypi: https://files.pythonhosted.org/packages/ed/61/01299712d3537e18d4452e8598115390826089e7000faf7cc5b20212aa81/streamlit_date_picker-0.0.5-py3-none-any.whl
-  name: streamlit-date-picker
-  version: 0.0.5
-  sha256: 34df7a6e55773079480a46b929ddd5e3cca47590395f265145afafcca4063999
-  requires_dist:
-  - streamlit>=1.27.0
-  requires_python: '>=3.8'
 - conda: https://conda.anaconda.org/conda-forge/noarch/streamlit-folium-0.26.2-pyhd8ed1ab_0.conda
   sha256: 6ab181e2490004f564637595ba895077e29fc8ea0655b108b6513167e64f6292
   md5: 6fa3820c5f55ed71a8400d175d717505
